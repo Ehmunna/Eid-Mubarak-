@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ঈদ মোবারক 🌙</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Anek+Bangla:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #d4a843;
+      --gold-light: #f0cc70;
+      --gold-dim: #8a6820;
+      --green-dark: #0a1f14;
+      --green-mid: #122a1c;
+      --green-card: rgba(14, 30, 20, 0.75);
+      --text-cream: #f5e9c8;
+      --text-soft: #d9c89a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 20% 0%, #1a3d25 0%, #0a1a10 40%, #060f09 100%);
+      font-family: 'Anek Bangla', sans-serif;
+      color: var(--text-cream);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Stars */
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: #fffbe0;
+      animation: twinkle var(--d, 3s) ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      from { opacity: 0.1; transform: scale(0.8); }
+      to   { opacity: 0.9; transform: scale(1.2); }
+    }
+
+    /* Crescent moon */
+    .moon {
+      position: fixed;
+      top: 40px;
+      right: 50px;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      box-shadow: inset -18px -5px 0 8px var(--gold);
+      background: transparent;
+      filter: drop-shadow(0 0 20px rgba(212, 168, 67, 0.5));
+      opacity: 0.85;
+      pointer-events: none;
+      z-index: 1;
+      animation: moonFloat 6s ease-in-out infinite alternate;
+    }
+    @keyframes moonFloat {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-10px); }
+    }
+
+    /* Floating particles */
+    .particles {
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 1;
+    }
+    .particle {
+      position: absolute;
+      width: 4px; height: 4px;
+      background: var(--gold-light);
+      border-radius: 50%;
+      animation: floatUp var(--dur, 8s) linear infinite;
+      opacity: 0;
+    }
+    @keyframes floatUp {
+      0%   { opacity: 0; transform: translateY(100vh) scale(0); }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.3; }
+      100% { opacity: 0; transform: translateY(-20vh) scale(1.5); }
+    }
+
+    /* Page wrapper */
+    .page {
+      position: relative;
+      z-index: 10;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* ===== HEADER: EID MUBARAK ===== */
+    .header-block {
+      text-align: center;
+      margin-bottom: 32px;
+      animation: fadeDown 1s ease both;
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .eid-arabic {
+      font-family: 'Noto Serif Bengali', serif;
+      font-size: clamp(2.6rem, 10vw, 4.5rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffe8a0, var(--gold), #c8962a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: none;
+      line-height: 1.15;
+      letter-spacing: 0.03em;
+    }
+
+    .eid-sub {
+      font-size: clamp(1.2rem, 4vw, 1.6rem);
+      color: var(--text-soft);
+      margin-top: 6px;
+      letter-spacing: 0.08em;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 14px auto;
+      width: 80%;
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    }
+    .divider-icon { color: var(--gold); font-size: 1.2rem; }
+
+    /* ===== CARD ===== */
+    .card {
+      width: 100%;
+      background: var(--green-card);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(212, 168, 67, 0.35);
+      border-radius: 24px;
+      padding: 28px 24px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.9s ease both;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(212,168,67,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .card:nth-child(2) { animation-delay: 0.15s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+    .card:nth-child(4) { animation-delay: 0.45s; }
+    .card:nth-child(5) { animation-delay: 0.6s; }
+
+    /* Card label */
+    .card-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .card-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(212,168,67,0.4), transparent);
+    }
+
+    /* Message text */
+    .msg-text {
+      font-family: 'Noto Serif Bengali', serif;
+      font-size: clamp(1.15rem, 3.5vw, 1.4rem);
+      line-height: 1.9;
+      color: var(--text-cream);
+      font-weight: 400;
+    }
+    .msg-text em {
+      color: var(--gold-light);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    /* ===== AUDIO PLAYER ===== */
+    .audio-player {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(212,168,67,0.25);
+      border-radius: 50px;
+      padding: 12px 20px;
+      margin-top: 4px;
+      transition: border-color 0.3s;
+    }
+    .audio-player:hover {
+      border-color: rgba(212,168,67,0.55);
+    }
+
+    .play-btn {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+      border: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px rgba(212,168,67,0.3);
+    }
+    .play-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 20px rgba(212,168,67,0.5);
+    }
+    .play-btn:active { transform: scale(0.96); }
+
+    .progress-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-dim), var(--gold-light));
+      border-radius: 4px;
+      width: 0%;
+      transition: width 0.3s linear;
+    }
+    .time-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: rgba(212,168,67,0.6);
+    }
+
+    /* ===== CREDIT ===== */
+    .credit {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(212, 168, 67, 0.45);
+      letter-spacing: 0.1em;
+      animation: fadeUp 1s ease 0.8s both;
+    }
+
+    /* Hidden audio */
+    audio { display: none; }
+
+    /* Scroll-to-play hint */
+    .scroll-hint {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+    .scroll-hint.hidden { opacity: 0; }
+    .scroll-hint-text {
+      font-size: 0.75rem;
+      color: rgba(212, 168, 67, 0.85);
+      letter-spacing: 0.08em;
+      text-align: center;
+      animation: hintPulse 2s ease-in-out infinite;
+    }
+    .scroll-hint-arrow {
+      width: 20px; height: 20px;
+      border-right: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      transform: rotate(45deg);
+      animation: arrowBounce 0.9s ease-in-out infinite alternate;
+    }
+    @keyframes arrowBounce {
+      from { transform: rotate(45deg) translateY(-5px); opacity: 0.5; }
+      to   { transform: rotate(45deg) translateY(5px);  opacity: 1; }
+    }
+    @keyframes hintPulse {
+      0%, 100% { opacity: 0.6; }
+      50%       { opacity: 1; }
+    }
+
+    @media (max-width: 480px) {
+      .moon { width: 60px; height: 60px; top: 20px; right: 20px; }
+      .page { padding: 28px 14px 50px; }
+      .card { padding: 22px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Scroll-to-play hint -->
+<div class="scroll-hint" id="scrollHint">
+  <div class="scroll-hint-text">🎵 নিচে scroll করো — গান শুরু হবে</div>
+  <div class="scroll-hint-arrow"></div>
+</div>
+
+<!-- Stars -->
+<div class="stars" id="stars"></div>
+
+<!-- Moon -->
+<div class="moon"></div>
+
+<!-- Particles -->
+<div class="particles" id="particles"></div>
+
+<!-- Hidden audio elements -->
+<audio id="bgSong" loop>
+  <source src="ed.mp3" type="audio/mpeg">
+</audio>
+<audio id="voice1">
+  <source src="eid.mp3" type="audio/mpeg">
+</audio>
+<audio id="voice2">
+  <source src="munna.mp3" type="audio/mpeg">
+</audio>
+
+<div class="page">
+
+  <!-- ===== HEADER ===== -->
+  <div class="header-block">
+    <div class="eid-arabic">ঈদ মোবারক ভন্ড 🌙</div>
+    <div class="eid-sub">Eid Mubarak ✦ عيد مبارك</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-icon">✦</div>
+      <div class="divider-line"></div>
+    </div>
+  </div>
+
+  <!-- ===== CARD 1: প্রথম লেখা ===== -->
+  <div class="card">
+    <div class="card-label">✦ তোর জন্য কিছু কথা</div>
+    <div class="msg-text">
+      <!-- ✏️ এখানে তোমার লেখা দাও -->
+      এই ঈদে তোকে জানাই <em>অনেক অনেক ভালোবাসা</em> ❤️<br><br>
+      তুই আমার কাছে অনেক <em>স্পেশাল</em> — সেটা জানিস তো? 
+      আল্লাহ তোকে সবসময় ভালো রাখুক, সুখী রাখুক। 
+      তোর জীবনে যা চাস সব হয়ে যাক। <em>ঈদ মোবারক! 🌙</em>
+    </div>
+  </div>
+
+  <!-- ===== CARD 2: প্রথম Voice ===== -->
+  <div class="card">
+    <div class="card-label">তোর জন্য voice টা🎤</div>
+    <div class="audio-player" id="player1">
+      <button class="play-btn" onclick="toggleAudio('voice1','player1')" id="btn1">▶</button>
+      <div class="progress-wrap">
+        <div class="progress-bar" onclick="seekAudio(event,'voice1','fill1')">
+          <div class="progress-fill" id="fill1"></div>
+        </div>
+        <div class="time-row">
+          <span id="cur1">0:00</span>
+          <span id="dur1">0:00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CARD 3: দ্বিতীয় লেখা ===== -->
+  <div class="card">
+    <div class="card-label">💬</div>
+    <div class="msg-text">
+      <!-- ✏️ এখানে দ্বিতীয় লেখা দাও -->
+      শুধু একটাই কথা — <em>তুই থাকিস</em>, 
+      আমার পাশে, বন্ধু হয়ে।
+      এই ঈদের দিনটা তোর জন্য <em>অনেক সুন্দর</em> হোক। 🌸
+    </div>
+  </div>
+
+  <!-- ===== CARD 4: দ্বিতীয় Voice ===== -->
+  <div class="card">
+    <div class="card-label">আমার পক্ষ থেকে তোর জন্য 🎤 </div>
+    <div class="audio-player" id="player2">
+      <button class="play-btn" onclick="toggleAudio('voice2','player2')" id="btn2">▶</button>
+      <div class="progress-wrap">
+        <div class="progress-bar" onclick="seekAudio(event,'voice2','fill2')">
+          <div class="progress-fill" id="fill2"></div>
+        </div>
+        <div class="time-row">
+          <span id="cur2">0:00</span>
+          <span id="dur2">0:00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="credit">✦ create by EH Munna ✦</div>
+
+</div><!-- /page -->
+
+<script>
+  // ===== Stars =====
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 3 + 1;
+    s.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%; top:${Math.random()*100}%;
+      --d:${(Math.random()*4+2).toFixed(1)}s;
+      animation-delay:${(Math.random()*5).toFixed(1)}s;
+    `;
+    starsEl.appendChild(s);
+  }
+
+  // ===== Particles =====
+  const partEl = document.getElementById('particles');
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.cssText = `
+      left:${Math.random()*100}%;
+      --dur:${(Math.random()*10+7).toFixed(1)}s;
+      animation-delay:${(Math.random()*10).toFixed(1)}s;
+      width:${Math.random()*4+2}px; height:${Math.random()*4+2}px;
+    `;
+    partEl.appendChild(p);
+  }
+
+  // ===== Auto-play background song on scroll =====
+  const bgSong = document.getElementById('bgSong');
+  bgSong.volume = 0.25;
+
+  let bgStarted = false;
+
+  function tryPlayBg() {
+    if (bgStarted) return;
+    bgSong.play().then(() => {
+      bgStarted = true;
+      // Remove all listeners once started
+      window.removeEventListener('scroll', tryPlayBg);
+      document.removeEventListener('click', tryPlayBg);
+      document.removeEventListener('touchstart', tryPlayBg);
+    }).catch(() => {});
+  }
+
+  // Try immediately (some browsers allow it without interaction)
+  bgSong.play().then(() => {
+    bgStarted = true;
+  }).catch(() => {
+    // Fallback 1: play on SCROLL (main feature)
+    window.addEventListener('scroll', tryPlayBg, { passive: true });
+    // Fallback 2: play on first touch/click (mobile backup)
+    document.addEventListener('click', tryPlayBg, { once: true });
+    document.addEventListener('touchstart', tryPlayBg, { once: true });
+  });
+
+  // Music note animation on scroll
+  window.addEventListener('scroll', () => {
+    if (!bgStarted) return;
+    const scrollY = window.scrollY;
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    const pct = maxScroll > 0 ? scrollY / maxScroll : 0;
+    // Slightly increase volume as user scrolls deeper (0.2 → 0.45)
+    bgSong.volume = Math.min(0.45, 0.2 + pct * 0.25);
+  }, { passive: true });
+
+  // Hide scroll hint once music starts or user scrolls
+  const scrollHint = document.getElementById('scrollHint');
+  const hideHint = () => {
+    scrollHint.classList.add('hidden');
+    setTimeout(() => scrollHint.style.display = 'none', 700);
+  };
+  window.addEventListener('scroll', hideHint, { once: true });
+  bgSong.addEventListener('play', hideHint, { once: true });
+
+  // ===== Audio players =====
+  const allAudios = ['voice1', 'voice2'];
+
+  function fmtTime(s) {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2, '0');
+    return `${m}:${sec}`;
+  }
+
+  function setupPlayer(id, fillId, curId, durId) {
+    const audio = document.getElementById(id);
+    const fill  = document.getElementById(fillId);
+    const cur   = document.getElementById(curId);
+    const dur   = document.getElementById(durId);
+
+    audio.addEventListener('loadedmetadata', () => {
+      dur.textContent = fmtTime(audio.duration);
+    });
+    audio.addEventListener('timeupdate', () => {
+      if (!audio.duration) return;
+      const pct = (audio.currentTime / audio.duration) * 100;
+      fill.style.width = pct + '%';
+      cur.textContent = fmtTime(audio.currentTime);
+    });
+    audio.addEventListener('ended', () => {
+      fill.style.width = '0%';
+      cur.textContent = '0:00';
+      const n = id === 'voice1' ? '1' : '2';
+      document.getElementById('btn' + n).textContent = '▶';
+    });
+  }
+
+  setupPlayer('voice1', 'fill1', 'cur1', 'dur1');
+  setupPlayer('voice2', 'fill2', 'cur2', 'dur2');
+
+  function toggleAudio(audioId, playerId) {
+    const audio = document.getElementById(audioId);
+    const n = audioId === 'voice1' ? '1' : '2';
+    const btn = document.getElementById('btn' + n);
+
+    // pause others
+    allAudios.forEach(id => {
+      if (id !== audioId) {
+        const a = document.getElementById(id);
+        a.pause();
+        a.currentTime = 0;
+        const other = id === 'voice1' ? '1' : '2';
+        document.getElementById('btn' + other).textContent = '▶';
+      }
+    });
+
+    if (audio.paused) {
+      audio.play().catch(() => {});
+      btn.textContent = '⏸';
+    } else {
+      audio.pause();
+      btn.textContent = '▶';
+    }
+  }
+
+  function seekAudio(event, audioId, fillId) {
+    const audio = document.getElementById(audioId);
+    if (!audio.duration) return;
+    const bar = event.currentTarget;
+    const rect = bar.getBoundingClientRect();
+    const ratio = (event.clientX - rect.left) / rect.width;
+    audio.currentTime = ratio * audio.duration;
+  }
+</script>
+</body>
+</html>
